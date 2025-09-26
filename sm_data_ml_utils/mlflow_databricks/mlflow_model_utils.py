@@ -8,8 +8,8 @@ import mlflow
 import pandas as pd
 import torch
 
-from data_ml_utils.core.databricks_utils import get_target_stage_for_env
-from data_ml_utils.core.databricks_utils import load_yaml
+from sm_data_ml_utils.core.databricks_utils import get_target_stage_for_env
+from sm_data_ml_utils.core.databricks_utils import load_yaml
 
 # from joblib import load
 

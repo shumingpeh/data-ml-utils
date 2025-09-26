@@ -1,13 +1,15 @@
 import datetime
+import pathlib
 from typing import Callable
+from unittest.mock import mock_open
 from unittest.mock import patch
 
-from data_ml_utils.core.databricks_utils import get_date_intervals_model_drift
-from data_ml_utils.core.databricks_utils import get_function_to_load
-from data_ml_utils.core.databricks_utils import get_target_stage_for_env
-from data_ml_utils.core.databricks_utils import get_test_date
-from data_ml_utils.core.databricks_utils import load_yaml
-from data_ml_utils.core.pyathena_utils import read_sql
+from sm_data_ml_utils.core.databricks_utils import get_date_intervals_model_drift
+from sm_data_ml_utils.core.databricks_utils import get_function_to_load
+from sm_data_ml_utils.core.databricks_utils import get_target_stage_for_env
+from sm_data_ml_utils.core.databricks_utils import get_test_date
+from sm_data_ml_utils.core.databricks_utils import load_yaml
+from sm_data_ml_utils.core.databricks_utils import read_sql
 
 
 class TestDatabricksCommonUtils:

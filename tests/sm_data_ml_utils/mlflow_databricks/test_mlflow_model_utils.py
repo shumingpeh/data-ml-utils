@@ -4,24 +4,24 @@ from unittest.mock import patch
 import pandas as pd
 import pytest
 
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import (
     mlflow_decision_to_promote,
 )
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import (
     mlflow_get_both_registered_model_info_run_id,
 )
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import (
     mlflow_get_model_metrics,
 )
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import (
     mlflow_get_model_stage_description,
 )
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import (
     mlflow_get_model_version,
 )
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_load_artifact
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_load_model
-from data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_promote_model
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_load_artifact
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_load_model
+from sm_data_ml_utils.mlflow_databricks.mlflow_model_utils import mlflow_promote_model
 
 
 class TestMlflowModelUtils:
@@ -29,7 +29,7 @@ class TestMlflowModelUtils:
     test class for mlflow model-specific utilities
     """
 
-    @patch("data_ml_utils.mlflow_databricks.mlflow_model_utils.getattr")
+    @patch("sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.getattr")
     def test_mlflow_load_model(self, mock_getattr) -> None:
         """
         test if mlflow_load_model() can load model
@@ -48,7 +48,7 @@ class TestMlflowModelUtils:
         )
         mock_getattr.assert_called_once()
 
-    @patch("data_ml_utils.mlflow_databricks.mlflow_model_utils.getattr")
+    @patch("sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.getattr")
     def test_mlflow_load_model_pytorch(self, mock_getattr) -> None:
         """
         test if mlflow_load_model() can load model
@@ -81,7 +81,7 @@ class TestMlflowModelUtils:
             )
 
     @patch(
-        "data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.artifacts.download_artifacts"  # noqa: E501
+        "sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.artifacts.download_artifacts"  # noqa: E501
     )
     def test_mlflow_load_artifact_pkl_joblib_dict(
         self, mock_download_artifacts, mock_active_run, dummy_load_artifact
@@ -112,7 +112,7 @@ class TestMlflowModelUtils:
         pd.testing.assert_frame_equal(expected_return, dummy_load_artifact)
 
     @patch(
-        "data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.artifacts.download_artifacts"  # noqa: E501
+        "sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.artifacts.download_artifacts"  # noqa: E501
     )
     def test_mlflow_load_artifact_yaml(
         self, mock_download_artifacts, mock_active_run, dummy_load_artifact
@@ -132,7 +132,7 @@ class TestMlflowModelUtils:
 
         mock_active_run.return_value = MagicMock()
         mock_download_artifacts.return_value = (
-            "tests/data_ml_utils/core/test_yaml.yaml"
+            "tests/sm_data_ml_utils/core/test_yaml.yaml"
         )
         expected_return = mlflow_load_artifact(
             artifact_uri="test_uri",
@@ -151,7 +151,7 @@ class TestMlflowModelUtils:
                 artifact_uri="test", artifact_name="test", type_of_artifact="test"
             )
 
-    @patch("data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.get_run")
+    @patch("sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.get_run")
     def test_mlflow_get_model_metrics_dict(
         self, mock_mlflow_get_run, dummy_nested_double_callable_object
     ) -> None:
@@ -170,7 +170,7 @@ class TestMlflowModelUtils:
         expected_return = mlflow_get_model_metrics(run_id="test")
         assert expected_return == {"test": 1.0}  # noqa: S101
 
-    @patch("data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.get_run")
+    @patch("sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow.get_run")
     def test_mlflow_get_model_metrics_float(
         self, mock_mlflow_get_run, dummy_nested_double_callable_object
     ) -> None:
@@ -321,7 +321,7 @@ class TestMlflowModelUtils:
             )
 
     @patch(
-        "data_ml_utils.mlflow_databricks.mlflow_model_utils.get_target_stage_for_env"  # noqa: E501
+        "sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.get_target_stage_for_env"  # noqa: E501
     )
     def test_mlflow_promote_model(
         self, mock_target_env, dummy_nested_callable_object
@@ -364,7 +364,7 @@ class TestMlflowModelUtils:
         )
 
     @patch(
-        "data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow_promote_model"  # noqa: E501
+        "sm_data_ml_utils.mlflow_databricks.mlflow_model_utils.mlflow_promote_model"  # noqa: E501
     )
     def test_mlflow_decision_to_promote(self, mock_mlflow_promote_model):
         """

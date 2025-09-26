@@ -1,8 +1,8 @@
 import requests
 import responses
 
-from data_ml_utils.mlflow_databricks.mlflow_prediction_requests import get_requests
-from data_ml_utils.mlflow_databricks.mlflow_prediction_requests import (
+from sm_data_ml_utils.mlflow_databricks.mlflow_prediction_requests import get_requests
+from sm_data_ml_utils.mlflow_databricks.mlflow_prediction_requests import (
     verify_prediction,
 )
 

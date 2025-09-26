@@ -22,7 +22,7 @@ def read_sql(file_path: str) -> str:
     str
         query string of sql file
     """
-    return pathlib.Path(file_path).read_text()s
+    return pathlib.Path(file_path).read_text()
 
 def load_yaml(path: str) -> Dict:
     """

@@ -3,7 +3,7 @@ import logging
 import polling
 import requests
 
-from data_ml_utils.core.config import settings
+from sm_data_ml_utils.core.config import settings
 
 log = logging.getLogger(__name__)
 
