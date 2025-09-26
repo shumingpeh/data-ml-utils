@@ -1,19 +1,19 @@
 ---
-name: hipages Checks
+name: Checks
 
 on:
     pull_request:
         branches:
-            - master
+            - main
         types: [opened, synchronize, edited]
     push:
         branches:
-            - master
+            - main
 
 jobs:
     jira-title:
         name: JIRA Title Check 🎪
-        if: github.ref_name != 'master'
+        if: github.ref_name != 'main'
         runs-on: ubuntu-latest
         steps:
             - name: Regex Check on PR Title
@@ -28,7 +28,7 @@ jobs:
 
     pre-commit:
         name: Pre-Commit Check 🚧
-        if: github.ref_name != 'master'
+        if: github.ref_name != 'main'
         runs-on: ubuntu-latest
         timeout-minutes: 5
         steps:

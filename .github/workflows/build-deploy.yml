@@ -3,11 +3,11 @@ name: Build & Deploy
 on:
     push:
         branches:
-            - master
+            - main
     workflow_dispatch:
     pull_request:
         branches:
-            - master
+            - main
         types: [opened, synchronize]
 
 concurrency:
@@ -87,7 +87,7 @@ jobs:
                   path: |
                       coverage/
     deploy:
-        if: github.ref_name == 'master'
+        if: github.ref_name == 'main'
         needs: [lint, test]
         name: Publish and build pypi package
         runs-on: ubuntu-latest
