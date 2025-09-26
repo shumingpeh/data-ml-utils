@@ -1,9 +1,9 @@
 lint: ## Lint code
-	flake8 data_ml_utils/ tests/ --count
+	flake8 sm_data_ml_utils/ tests/ --count
 
 
 format: ## Format code
-	black data_ml_utils/ tests/
+	black sm_data_ml_utils/ tests/
 
 
 pytest: ## pytest
