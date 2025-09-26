@@ -24,6 +24,7 @@ def read_sql(file_path: str) -> str:
     """
     return pathlib.Path(file_path).read_text()
 
+
 def load_yaml(path: str) -> Dict:
     """
     function that loads the settings from the yaml file
