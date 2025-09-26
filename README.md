@@ -15,7 +15,7 @@ Head over to https://data-ml-utils.readthedocs.io/en/latest/index.html# to read 
 Almost one liner
 ```python
 import os
-from hip_data_ml_utils.pyathena_client.client import PyAthenaClient
+from data_ml_utils.pyathena_client.client import PyAthenaClient
 
 os.environ["AWS_ACCESS_KEY_ID"] = "xxx"
 os.environ["AWS_SECRET_ACCESS_KEY"] = "xxx" # pragma: allowlist secret

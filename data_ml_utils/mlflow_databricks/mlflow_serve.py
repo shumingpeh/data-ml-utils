@@ -3,7 +3,7 @@ import logging
 import polling
 import requests
 
-from hip_data_ml_utils.core.config import settings
+from data_ml_utils.core.config import settings
 
 log = logging.getLogger(__name__)
 
