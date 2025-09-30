@@ -7,6 +7,7 @@ from typing import Union
 import mlflow
 import pandas as pd
 import torch
+from joblib import load
 
 from sm_data_ml_utils.core.databricks_utils import get_target_stage_for_env
 from sm_data_ml_utils.core.databricks_utils import load_yaml
@@ -75,6 +76,13 @@ def mlflow_load_artifact(
 
     if type_of_artifact not in ("joblib", "pkl", "dict", "yaml"):
         raise ValueError("Artifact type not supported")
+
+    if type_of_artifact in ("joblib"):
+        return load(  # noqa: S301
+            mlflow.artifacts.download_artifacts(
+                artifact_uri=f"{artifact_uri}/{artifact_name}"
+            )
+        )
 
     if type_of_artifact in ("joblib", "pkl", "dict"):
         return pd.read_pickle(  # noqa: S301
