@@ -14,6 +14,7 @@ def enable_endpoint(
     databricks_cluster_hostname: str,
     databricks_workspace_token: str,
     model_version: int,
+    catalog_name: str,
     workload_type: str = "CPU",
     request_time_out: int = 60,
 ) -> bool:
@@ -55,15 +56,24 @@ def enable_endpoint(
     json = {
         "name": model_name,
         "config": {
-            "served_models": [
+            "served_entities": [
                 {
-                    "model_name": model_name,
-                    "model_version": model_version,
+                    "name": model_name,
+                    "entity_name": model_name,
+                    "entity": model_version,
                     "workload_type": workload_type,
                     "workload_size": settings.MODEL_SERVING_WORKLOAD_SIZE,
                     "scale_to_zero_enabled": settings.MODEL_SERVING_SCALE_TO_ZERO,
                 }
             ]
+        },
+        "ai_gateway": {
+            "inference_table_config": {
+                "enable": "true",
+                "catalog_name": catalog_name,
+                "schema_name": "ml",
+                "table_name_prefix": model_name,
+            }
         },
     }
 
@@ -216,23 +226,18 @@ def update_compute_config(
     url = f"{databricks_cluster_hostname}/{databricks_api_url}/{model_name}/config"
     headers = {"Authorization": f"Bearer {databricks_workspace_token}"}
     json = {
-        "served_models": [
+        "served_entities": [
             {
                 "name": model_name,
-                "model_name": model_name,
-                "model_version": model_version,
+                "entity_name": model_name,
+                "entity_version": model_version,
                 "workload_type": workload_type,
                 "workload_size": f"{workload_size_id.capitalize()}",
                 "scale_to_zero_enabled": f"{scale_to_zero_enabled}",
             }
         ],
         "traffic_config": {
-            "routes": [{"served_model_name": model_name, "traffic_percentage": 100}]
-        },
-        "auto_capture_config": {
-            "catalog_name": catalog_name,
-            "schema_name": "ml_features",
-            "table_name_prefix": model_name,
+            "routes": [{"served_entity_name": model_name, "traffic_percentage": 100}]
         },
     }
 

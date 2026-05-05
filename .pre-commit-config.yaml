@@ -1,6 +1,6 @@
 ---
 default_language_version:
-    python: python3.9
+    python: python3.13
 repos:
   # Security
     - repo: https://github.com/zricethezav/gitleaks
@@ -47,12 +47,12 @@ repos:
           - id: pyupgrade
             args: [--py3-plus, --py38-plus]
     - repo: https://github.com/psf/black
-      rev: 22.6.0
+      rev: 25.1.0
       hooks:
           - id: black
             language_version: python3
     - repo: https://github.com/PyCQA/flake8
-      rev: 5.0.4
+      rev: 7.1.1
       hooks:
           - id: flake8
-            additional_dependencies: [flake8-bugbear==22.10.27, flake8-bandit==4.1.1, flake8-builtins==2.0.1, flake8-local-import==1.0.6]
+            additional_dependencies: [flake8-bugbear==24.12.12, flake8-bandit==4.1.1, flake8-builtins==2.5.0, flake8-local-import==1.0.6]

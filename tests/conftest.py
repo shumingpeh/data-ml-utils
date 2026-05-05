@@ -9,9 +9,9 @@ import pytest
 def aws_credentials():
     """Mocked AWS Credentials for moto."""
     os.environ["AWS_ACCESS_KEY_ID"] = "testing"  # pragma: allowlist secret
-    os.environ[  # pragma: allowlist secret
-        "AWS_SECRET_ACCESS_KEY"  # noqa: S105
-    ] = "testing"
+    os.environ["AWS_SECRET_ACCESS_KEY"] = (  # pragma: allowlist secret  # noqa: S105
+        "testing"
+    )
     os.environ["AWS_DEFAULT_REGION"] = "ap-southeast-2"  # pragma: allowlist secret
     os.environ["S3_BUCKET"] = "s3://au-com-dummy/athena_queries/"
 
@@ -32,7 +32,7 @@ def dummy_client_args_dict():
     return {
         "server_hostname": "foo",
         "http_path": "dummy_path",
-        "access_token": "tok",
+        "access_token": "tok",  # noqa: S105
     }
 
 
