@@ -104,19 +104,19 @@ def mlflow_log_register_model(
     if type_of_model in model_func_dict:
         if mlflow.active_run():
             model_func = getattr(mlflow, model_func_dict[type_of_model][0])
-            model_func.log_model(
+            model_info = model_func.log_model(
                 **{type_of_model: model, model_func_dict[type_of_model][1]: code_path},
                 signature=signature,
                 input_example=input_example,
                 registered_model_name=name_of_registered_model,
-                artifact_path=artifact_path,
-                extra_pip_requirements=extra_pip_requirements,
+                name=artifact_path,
+                pip_requirements=extra_pip_requirements,
                 await_registration_for=1800,
             )
             return (
                 "model logged"
                 if name_of_registered_model is None
-                else f"model logged and registered as {name_of_registered_model}"
+                else f"model logged and registered as {name_of_registered_model}, version: {model_info.registered_model_version}"  # noqa: E501
             )
 
         raise MlflowException("No active run to log model")
